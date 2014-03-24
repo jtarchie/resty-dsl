@@ -1,6 +1,4 @@
 require_relative '../lib/resty/dsl'
-require 'sqlite3'
-require 'with_model'
 require 'pry'
 
 ENV['DATABASE_URL'] ||= 'postgresql://dsl:dsl@127.0.0.1/resty_dsl_test'
@@ -15,7 +13,6 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.order = 'random'
 
-  config.extend(WithModel)
   config.include(ApiDSL)
   config.include(Resty::DSL)
   config.before { User.delete_all }
