@@ -1,5 +1,5 @@
 require 'tempfile'
-require 'childprocess'
+require 'rest_client'
 
 module ApiDSL
   def start_app(app)

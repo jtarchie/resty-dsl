@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'rest_client'
 require 'json'
 
 describe 'When getting many resources' do
