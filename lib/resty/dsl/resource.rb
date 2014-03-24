@@ -1,3 +1,5 @@
+require 'resty/dsl/query'
+
 module Resty
   class Resource
     def initialize(route, &block)
@@ -6,7 +8,11 @@ module Resty
     end
 
     def index(&block)
-      @index ||= Query.new(:get, block)
+      @index ||= Query::Index.new(block)
+    end
+
+    def show(&block)
+      @show ||= Query::Show.new(block)
     end
 
     def path
@@ -20,6 +26,14 @@ module Resty
               rds_json on;
 
               #{@index}
+            }
+
+            location ~ #{path}/(?<id>\\d+) {
+              postgres_pass database;
+              rds_json on;
+
+              postgres_escape $escaped_id $id;
+              #{@show}
             }
       }
     end

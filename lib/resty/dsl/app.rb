@@ -1,3 +1,6 @@
+require 'resty/dsl/resource'
+require 'resty/dsl/route'
+
 module Resty
   class App
     def initialize(&block)

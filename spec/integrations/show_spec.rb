@@ -1,24 +1,24 @@
 require 'spec_helper'
 
-describe 'When getting many resources' do
+describe 'When getting a single resources' do
   def create_user
     User.create
   end
 
-  context 'and a resource that exists' do
+  context 'and that resource exists' do
     let!(:user) { create_user }
     let(:app) do
       resty do
         database ENV['DATABASE_URL']
         port ENV['PORT']
         resource :users do
-          index { User.all }
+          show { User }
         end
       end
     end
 
     before do
-      get '/users'
+      get "/users/#{user.id}"
     end
 
     it 'has status of 200' do
@@ -31,7 +31,8 @@ describe 'When getting many resources' do
 
     it 'has valid JSON' do
       json = JSON.parse(body)
-      expect(json).to eq [{"id" => user.id}]
+      expect(json).to eq [{"id"=>user.id}]
     end
   end
 end
+

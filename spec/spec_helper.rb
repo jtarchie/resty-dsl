@@ -1,5 +1,6 @@
 require_relative '../lib/resty/dsl'
 require 'pry'
+require 'json'
 
 ENV['DATABASE_URL'] ||= 'postgresql://dsl:dsl@127.0.0.1/resty_dsl_test'
 ENV['PORT'] ||= 9979.to_s
