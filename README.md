@@ -2,6 +2,10 @@
 
 TODO: Write a gem description
 
+# References
+
+[1] http://rny.io/nginx/postgresql/2013/07/26/simple-api-with-nginx-and-postgresql.html
+
 ## Installation
 
 Add this line to your application's Gemfile:
