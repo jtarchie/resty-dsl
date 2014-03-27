@@ -21,8 +21,11 @@ module Resty
     end
 
     class Show < Base
-      def method
-        :get
+      def to_s
+        %Q{
+          postgres_query GET HEAD "#{scope.to_sql.gsub('"','\"')}";
+          postgres_rewrite  HEAD GET  no_rows 404;
+        }
       end
 
       private

@@ -21,6 +21,12 @@ module Resty
 
     def to_s
       %Q{
+            location @err404 {
+              default_type application/json;
+              echo '{"status":404}';
+            }
+            error_page 404 @err404;
+
             location #{path} {
               postgres_pass database;
               rds_json on;

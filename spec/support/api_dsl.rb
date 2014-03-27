@@ -12,7 +12,11 @@ module ApiDSL
 
   def get(uri)
     start_app(app)
-    @response ||= RestClient.get("http://localhost:9979#{uri}")
+    @response ||= begin
+                    RestClient.get("http://localhost:9979#{uri}")
+                  rescue RestClient::ResourceNotFound => e
+                    e.response
+                  end
   end
 
   def status
